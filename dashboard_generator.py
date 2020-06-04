@@ -5,7 +5,10 @@ import os
 def to_usd(my_price):
    return f"${my_price:,.2f}" #> $12,000.71
 
-CSV_FILENAME = "sales-201803.csv"
+#selected_report = csv_filename
+CSV_FILENAME = input("Please enter date of monthly sales report (sales-YYYYMM.csv): ")
+
+#CSV_FILENAME = "sales-201803.csv"
 
 csv_filepath = os.path.join("data/monthly-sales", CSV_FILENAME)
 #csv_filepath = "data/monthly-sales/sales-201803.csv"
