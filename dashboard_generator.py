@@ -5,6 +5,7 @@ from datetime import datetime
 import matplotlib.pyplot as plt
 from operator import itemgetter
 import itertools
+from random import random
 
 def to_usd(my_price):
    return f"${my_price:,.2f}" #> $12,000.71
@@ -37,7 +38,9 @@ for product, product_rows in rows_by_product:
 
 sorted_product_sales = sorted(product_sales, key=itemgetter("monthly_sales"), reverse=True)
 top_sellers = sorted_product_sales[0:3] # first three items in a list  
-top_sellers.reverse()        
+  
+top_sellers = sorted_product_sales[0:10] 
+top_sellers.reverse()       
 parsed_date = datetime.strptime(row["date"], "%Y-%m-%d")        
  
 print("-----------------------")
@@ -65,13 +68,9 @@ for top_seller in top_sellers:
     cols.append(top_seller["monthly_sales"])
 print("-----------------------")
 print("VISUALIZING THE DATA...")
-#TODO bar chart
+#TODO auto labels
 #TODO error message
 #plt.style.use('ggplot')
-
-
-
-
 
 #bar_value = [gen[product_name] for gen in product_name]
 #bar_labels = [gen[sales_usd] for gen in sales_usd]
@@ -94,18 +93,43 @@ print("VISUALIZING THE DATA...")
 #x = [p [product_name] for p in product_name]
 #y = [s [sales_usd] for s in sales_usd]
 
-
+numbers = [0, 2000, 4000, 6000, 8000]
+labels =  [to_usd(x) for x in numbers]
+plt.xticks(numbers, labels)
+plt.minorticks_on()
+plt.grid(which='major', linestyle='-', linewidth='0.5', color='lightgrey')
 
 plt.barh(rows, cols, color='blue')
 
-plt.xlabel("Sales USD")
+plt.xlabel("Sales (USD)")
 plt.ylabel("Product")
 plt.title("Top-selling Products This Month")
-numbers = [1000, 2000, 3000]
-labels =  [to_usd(x) for x in numbers]
-plt.xticks(numbers, labels)
-#plt.xticks([1000,2000], ["one thousand", "two thousand"])
-a = [1]
+
+
+def autolabel(labels, xpos='center'):
+    """
+    Attach a text label above each bar in *rects*, displaying its height.
+
+    *xpos* indicates which side to place the text w.r.t. the center of
+    the bar. It can be one of the following {'center', 'right', 'left'}.
+    """
+
+   #xpos = xpos.lower()  # normalize the case of the parameter
+   #ha = {'center': 'center', 'right': 'left', 'left': 'right'}
+   #offset = {'center': 0.5, 'right': 0.57, 'left': 0.43}  # x_txt = x + w*off
+
+for rect in labels:
+    height = rect.get_height()
+    ax.text(rect.get_x() + rect.get_width()*offset[xpos], 1.01*height,
+            '{}'.format(height), ha=ha[xpos], va='bottom')
+
+
+
+    autolabel(labels,xpos = 'center')
+
+
+# Customize the minor grid
+#plt.grid(which='minor', linestyle=':', linewidth='0.5', color='black')
 plt.show()
 
 #bar_data = top_sellers
