@@ -80,22 +80,9 @@ plt.minorticks_on()
 #plt.grid(which='major', linestyle='-', linewidth='0.5', color='lightgrey')
 
 plt.barh(rows, cols, color='blue')
-#plt.text(0.5, 0.3, "totalsales")
 
 plt.xlabel("Sales (USD)")
 plt.ylabel("Product")
 plt.title("Top-selling Products This Month")
 
-   #xpos = xpos.lower()  # normalize the case of the parameter
-   #ha = {'center': 'center', 'right': 'left', 'left': 'right'}
-   #offset = {'center': 0.5, 'right': 0.57, 'left': 0.43}  # x_txt = x + w*off
-
-#for rect in labels:
-#    height = rect.get_height()
-#    ax.text(rect.get_x() + rect.get_width()*offset[xpos], 1.01*height,
-#            '{}'.format(height), ha=ha[xpos], va='bottom')
-#    autolabel(labels,xpos = 'center')
-
-# Customize the minor grid
-#plt.grid(which='minor', linestyle=':', linewidth='0.5', color='black')
 plt.show()
